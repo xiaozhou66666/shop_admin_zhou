@@ -47,7 +47,7 @@ export default {
 <style scoped>
 .row-bg {
   height: 100%;
-  background-color: #2d434c;
+  background-color: red;
 }
 .el-form {
   background-color: #fff;
