@@ -104,33 +104,11 @@ export default {
       this.tableData = res.data.data;
     },
     async closeFun(row, id) {
-      let level1Ids = [];
-      let level2Ids = [];
-      let level3Ids = [];
-      // 获取二级权限的id，组合成数组
-      row.children.forEach(level1 => {
-        level1Ids.push(level1.id);
-        level1.children.forEach(level2 => {
-          level2Ids.push(level2.id);
-          level2.children.forEach(level3 => {
-            level3Ids.push(level3.id);
-          });
-        });
-      });
-      let result = [...level1Ids, ...level2Ids, ...level3Ids];
-      let ids = result.filter(v => v !== id).join();
-
-      console.log(ids);
-
       let res = await this.$http({
-        url: `roles/${row.id}/rights`,
-        method: "post",
-        data: {
-          rids: ids
-        }
+        url: `roles/${row.id}/rights/${id}`,
+        method: "delete"
       });
-      console.log(res);
-      if (res.data.meta.status === 200) {
+      if (res.data.meta.status == 200) {
         this.$message({
           type: "success",
           message: res.data.meta.msg,
@@ -138,6 +116,7 @@ export default {
         });
         this.getList();
       }
+      console.log(res);
     },
     async modelFun(row) {
       this.currentEditRoleId = row.id;

@@ -87,8 +87,6 @@ export default {
           Authorization: localStorage.getItem('token')
         }
       }).then(res => {
-        console.log(res)
-
         this.tableData = res.data.data.users
         this.total = res.data.data.total
       })

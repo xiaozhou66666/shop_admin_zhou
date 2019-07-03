@@ -35,67 +35,14 @@
             :collapse-transition="true"
             :router="true"
           >
-            <el-submenu index="1">
+            <el-submenu v-for="item in getList" :key="item.id" :index="item.id + ''">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>用户管理</span>
+                <span>{{item.authName}}</span>
               </template>
-              <el-menu-item-group>
-                <el-menu-item index="user" class="el-icon-menu">
-                  <span>用户列表</span>
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>权限管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="/roles" class="el-icon-menu">
-                  <span>角色列表</span>
-                </el-menu-item>
-                <el-menu-item index="/rights" class="el-icon-menu">
-                  <span>权限列表</span>
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="3">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>商品管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="1-6" class="el-icon-menu">
-                  <span>商品列表</span>
-                </el-menu-item>
-                <el-menu-item index="1-6" class="el-icon-menu">
-                  <span>分类参数</span>
-                </el-menu-item>
-                <el-menu-item index="1-6" class="el-icon-menu">
-                  <span>商品分类</span>
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="4">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>订单管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="1-6" class="el-icon-menu">
-                  <span>订单列表</span>
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="5">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span>数据统计</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="1-6" class="el-icon-menu">
-                  <span>数据报表</span>
+              <el-menu-item-group v-for="item1 in item.children" :key="item1.id">
+                <el-menu-item :index=" '/' +item1.path" class="el-icon-menu">
+                  <span>{{item1.authName}}</span>
                 </el-menu-item>
               </el-menu-item-group>
             </el-submenu>
@@ -108,6 +55,8 @@
     </el-container>
   </el-container>
 </template>
+
+
 <style>
 .el-container .el-header {
   background-color: #b3c1cd;
@@ -150,6 +99,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      getList: []
+    };
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -157,6 +111,13 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  async created() {
+    let res = await this.$http({
+      url: "menus"
+    });
+    console.log(res);
+    this.getList = res.data.data;
   }
 };
 </script>

@@ -17,7 +17,7 @@ export default new Router({
       path: '/home',
       component: home,
       children: [
-        { path: '/user', component: user },
+        { path: '/users', component: user },
         { path: '/roles', component: roles },
         { path: '/rights', component: rights }
       ]
