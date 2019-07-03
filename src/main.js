@@ -4,7 +4,16 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/index.css'
+import axios from 'axios'
 
+Vue.prototype.$http = axios
+axios.defaults.baseURL = 'http://localhost:8888/api/private/v1'
+axios.interceptors.request.use(config => {
+  // 统一添加 Authorization 请求头
+  config.headers.Authorization = localStorage.getItem('token')
+  // 一定要返回 config
+  return config
+})
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {

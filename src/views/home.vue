@@ -52,10 +52,10 @@
                 <span>权限管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="1-2" class="el-icon-menu">
+                <el-menu-item index="/roles" class="el-icon-menu">
                   <span>角色列表</span>
                 </el-menu-item>
-                <el-menu-item index="1-6" class="el-icon-menu">
+                <el-menu-item index="/rights" class="el-icon-menu">
                   <span>权限列表</span>
                 </el-menu-item>
               </el-menu-item-group>
