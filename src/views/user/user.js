@@ -236,7 +236,6 @@ export default {
         url: 'roles'
       })
 
-      console.log(roleResult.data.data)
       this.roleList = roleResult.data.data
     },
     makefenleiSureFun() {
