@@ -30,6 +30,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+var ElTreeGrid = require('element-tree-grid')
+Vue.component(ElTreeGrid.name, ElTreeGrid)
 Vue.use(ElementUI)
 
 new Vue({
